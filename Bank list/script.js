@@ -269,8 +269,8 @@ btnTransfer.addEventListener("click", function (e) {
     // donin the trasfer
     currentAccount.movements.push(-amount);
     receiverAcc.movements.push(amount);
-    currentAccount.movements.push(new Date().toISOString());
-    receiverAcc.movements.push(new Date().toISOString());
+    currentAccount.movementsDates.push(new Date().toISOString());
+    receiverAcc.movementsDates.push(new Date().toISOString());
 
     updateUI(currentAccount);
     clearInterval(timer);
