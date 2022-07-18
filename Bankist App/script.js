@@ -195,9 +195,9 @@ const startLogOutTimer = function () {
 let currentAccount, timer;
 
 // Fake account always loged in
-currentAccount = account1;
-updateUI(currentAccount);
-containerApp.style.opacity = 100;
+// currentAccount = account1;
+// updateUI(currentAccount);
+// containerApp.style.opacity = 100;
 
 // Log in
 btnLogin.addEventListener("click", function (e) {
