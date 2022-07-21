@@ -13,11 +13,11 @@ body {
   font-family: system-ui;
   color: #555;
   background-color: #f7f7f7;
-  min-height: 100vh;
+  /* min-height: 100vh; */
 
-  display: flex;
+  /* display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center; */
 }
 
 .container {
@@ -28,7 +28,11 @@ body {
 
 .countries {
   /* margin-bottom: 8rem; */
-  display: flex;
+  /* display: flex; */
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  row-gap: 4.8rem;
+  column-gap: 3.2rem;
 
   font-size: 2rem;
   opacity: 0;
@@ -41,7 +45,7 @@ body {
   font-size: 1.8rem;
   width: 30rem;
   border-radius: 0.7rem;
-  margin: 0 3rem;
+  /* margin: 0 3rem; */
   /* overflow: hidden; */
 }
 
@@ -123,4 +127,73 @@ body {
   margin: 2rem;
   border: 3rem solid white;
   box-shadow: 0 2rem 5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+/******************************************/
+form {
+  display: flex;
+  gap: 2.4rem;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  background-color: #eee;
+  font-size: 2.2rem;
+  margin: 2.4rem;
+  margin-top: 0;
+  padding: 3rem;
+  box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.075);
+}
+
+.country-input,
+.country-btn {
+  background-color: #fff;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.075);
+}
+
+.country-btn {
+  border-radius: 1000px;
+}
+
+.country-btn:hover {
+  background-color: #f2f2f2;
+}
+
+@media (max-width: 84em) {
+  .countries {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 60.625em) {
+  html {
+    font-size: 50%;
+  }
+}
+
+@media (max-width: 48.75em) {
+  .countries {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 31.875em) {
+  html {
+    font-size: 43.75%;
+  }
+}
+
+@media (max-width: 28.125em) {
+  .countries {
+    grid-template-columns: 1fr;
+  }
+
+  form {
+    gap: 1.2rem;
+    padding: 1.8rem;
+  }
 }
