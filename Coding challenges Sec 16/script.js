@@ -1,13 +1,15 @@
 'use strict';
-
+const search = document.querySelector('.country-btn');
+const countryInput = document.querySelector('.country-input');
 const btn = document.querySelector('.btn-country');
 const countriesContainer = document.querySelector('.countries');
 
-///////////////////////////////////////
 // https://restcountries.com/v2/
+///////////////////////////////////////
 
 const getCountryData = function (country) {
   const request = new XMLHttpRequest();
+
   request.open('GET', `https://restcountries.com/v2/name/${country}`);
   request.send();
 
@@ -33,3 +35,7 @@ const getCountryData = function (country) {
   });
 };
 getCountryData('portugal');
+search.addEventListener('click', function (e) {
+  e.preventDefault();
+  getCountryData(countryInput.value);
+});
