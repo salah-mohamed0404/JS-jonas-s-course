@@ -26,6 +26,8 @@ const renderCountry = function (data, className = '') {
   countriesContainer.style.opacity = 1;
 };
 
+// XML way
+/*
 const getCountryData = function (country) {
   const request = new XMLHttpRequest();
 
@@ -55,7 +57,16 @@ const getCountryData = function (country) {
 };
 
 getCountryData('portugal');
+*/
+///////////////////////////////////////
+const getCountryData = function (country) {
+  fetch(`https://restcountries.com/v2/name/${country}`)
+    .then(response => response.json())
+    .then(data => renderCountry(data[0]));
+};
+getCountryData('portugal');
 
+///////////////////////////////////////
 search.addEventListener('click', function (e) {
   e.preventDefault();
   getCountryData(countryInput.value);
