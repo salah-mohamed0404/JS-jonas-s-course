@@ -1,13 +1,13 @@
-'use strict';
-const search = document.querySelector('.country-btn');
-const countryInput = document.querySelector('.country-input');
-const btn = document.querySelector('.btn-country');
-const countriesContainer = document.querySelector('.countries');
+"use strict";
+const search = document.querySelector(".country-btn");
+const countryInput = document.querySelector(".country-input");
+const btn = document.querySelector(".btn-country");
+const countriesContainer = document.querySelector(".countries");
 
 // https://restcountries.com/v2/
 ///////////////////////////////////////
 
-const renderCountry = function (data, className = '') {
+const renderCountry = function (data, className = "") {
   const html = `
   <article class="country ${className}">
     <img class="country__img" src="${data.flag}" />
@@ -22,7 +22,12 @@ const renderCountry = function (data, className = '') {
     </div>
 </article>
   `;
-  countriesContainer.insertAdjacentHTML('beforeend', html);
+  countriesContainer.insertAdjacentHTML("beforeend", html);
+  countriesContainer.style.opacity = 1;
+};
+
+const renderError = function (msg) {
+  countriesContainer.insertAdjacentText("beforeend", msg);
   countriesContainer.style.opacity = 1;
 };
 
@@ -59,15 +64,44 @@ const getCountryData = function (country) {
 getCountryData('portugal');
 */
 ///////////////////////////////////////
-const getCountryData = function (country) {
-  fetch(`https://restcountries.com/v2/name/${country}`)
-    .then(response => response.json())
-    .then(data => renderCountry(data[0]));
+const getJSON = function (url, errorMsg = "Something went wrong") {
+  return fetch(url).then(response => {
+    if (!response.ok) throw new Error(`country not found (${response.status})`);
+
+    return response.json();
+  });
 };
-getCountryData('portugal');
+
+const getCountryData = function (country) {
+  // country 1
+
+  getJSON(`https://restcountries.com/v2/name/${country}`, "Country not found")
+    .then(data => {
+      renderCountry(data[0]);
+      const neighbour = data[0].borders[0];
+
+      if (!neighbour) throw new Error("No neighbour found!");
+
+      // country 2
+      return getJSON(
+        `https://restcountries.com/v2/alpha/${neighbour}`,
+        "Country not found"
+      );
+    })
+
+    .then(data => renderCountry(data, "neighbour"))
+    .catch(err => {
+      console.error(`${err}💥💥💥`);
+      renderError(`Something went wrong 💥💥 ${err.message}. Try again!`);
+    })
+    .finally(() => {
+      countriesContainer.style.opacity = 1;
+    });
+};
+getCountryData("portugal");
 
 ///////////////////////////////////////
-search.addEventListener('click', function (e) {
+search.addEventListener("click", function (e) {
   e.preventDefault();
   getCountryData(countryInput.value);
 });
