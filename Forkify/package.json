@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "description": "recipe application",
   "scripts": {
-    "start": "parcal index.html",
-    "build": "parcal build index.html"
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
   },
   "author": "salah mohamed",
   "license": "ISC",
   "devDependencies": {
+    "@parcel/transformer-sass": "^2.6.2",
     "parcel": "^2.6.2"
   }
 }
