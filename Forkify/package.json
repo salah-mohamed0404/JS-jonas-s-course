@@ -2,10 +2,13 @@
   "name": "forkify",
   "version": "1.0.0",
   "description": "recipe application",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "parcal index.html",
+    "build": "parcal build index.html"
   },
   "author": "salah mohamed",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^2.6.2"
+  }
 }
