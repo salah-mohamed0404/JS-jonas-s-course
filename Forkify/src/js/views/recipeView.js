@@ -1,19 +1,21 @@
-import icons from '../../img/icons.svg';
-import fracty from 'fracty';
+import icons from "../../img/icons.svg";
+import fracty from "fracty";
 
 class RecipeView {
-  #parantElement = document.querySelector('.recipe');
+  #parantElement = document.querySelector(".recipe");
   #data;
+  #errorMessage = "We could not find that recipe. Please try another one!";
+  #Message = "";
 
   render(data) {
     this.#data = data;
     const markup = this.#generateMarkup();
     this.#clear();
-    this.#parantElement.insertAdjacentHTML('afterbegin', markup);
+    this.#parantElement.insertAdjacentHTML("afterbegin", markup);
   }
 
   #clear() {
-    this.#parantElement.innerHTML = '';
+    this.#parantElement.innerHTML = "";
   }
 
   renderSpinner() {
@@ -25,12 +27,42 @@ class RecipeView {
           </div> 
           `;
 
-    this.#parantElement.innerHTML = '';
-    this.#parantElement.insertAdjacentHTML('afterbegin', markup);
+    this.#parantElement.innerHTML = "";
+    this.#parantElement.insertAdjacentHTML("afterbegin", markup);
+  }
+
+  renderError(message = this.#errorMessage) {
+    const markup = `
+      <div class="error">
+        <div>
+          <svg>
+            <use href="${icons}#icon-alert-triangle"></use>
+          </svg>
+        </div>
+        <p>${message}</p>
+      </div>
+    `;
+    this.#clear();
+    this.#parantElement.insertAdjacentHTML("afterbegin", markup);
+  }
+
+  renderMessage(message = this.#Message) {
+    const markup = `
+      <div class="message">
+        <div>
+          <svg>
+            <use href="${icons}#icon-smile"></use>
+          </svg>
+        </div>
+        <p>${message}</p>
+      </div>
+    `;
+    this.#clear();
+    this.#parantElement.insertAdjacentHTML("afterbegin", markup);
   }
 
   addHandlerRender(handler) {
-    ['hashchange', 'load'].forEach(ev => window.addEventListener(ev, handler));
+    ["hashchange", "load"].forEach(ev => window.addEventListener(ev, handler));
   }
 
   #generateMarkup() {
@@ -92,7 +124,7 @@ class RecipeView {
       <div class="recipe__ingredients">
         <h2 class="heading--2">Recipe ingredients</h2>
         <ul class="recipe__ingredient-list">
-          ${this.#data.ingredients.map(this.#generateMarkupIngredient).join('')}
+          ${this.#data.ingredients.map(this.#generateMarkupIngredient).join("")}
         </ul>
       </div>
 
@@ -126,7 +158,7 @@ class RecipeView {
           <use href="${icons}#icon-check"></use>
         </svg>
         <div class="recipe__quantity">${
-          ing.quantity ? fracty(ing.quantity) : ''
+          ing.quantity ? fracty(ing.quantity) : ""
         }</div>
         <div class="recipe__description">
           <span class="recipe__unit">${ing.unit}</span>
