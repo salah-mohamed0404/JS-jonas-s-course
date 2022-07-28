@@ -1,5 +1,4 @@
 import View from "./View.js";
-import icons from "../../img/icons.svg";
 
 class PreviewView extends View {
   _parantElement = "";
